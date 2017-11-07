@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import './WeatherChannel.css';
 import wheatherReport from './weatherreport';
 
 class WeatherChannel extends Component {
@@ -8,8 +8,11 @@ class WeatherChannel extends Component {
     return (
       <div className="card-group">
         {wheatherReport.days.map(day => {
-          return <DailyForcast key={day.day} data={day} />;
+          return <WeeklyForcast key={day.day} data={day} />;
         })}
+        <div className="hidden">
+          <DailyForcast />
+        </div>
       </div>
     );
   }
@@ -17,34 +20,34 @@ class WeatherChannel extends Component {
 
 export default WeatherChannel;
 
-const DailyForcast = props => {
+const WeeklyForcast = props => {
   const { day, img, temp_hi, temp_lo } = props.data;
   return (
     <div className="card w-20">
-      <DailyForcastDay text={day} />
-      <DailyForcastImage src={img} />
+      <WeeklyForcastDay text={day} />
+      <WeeklyForcastImage src={img} />
       <div className="card-body">
-        <DailyForcastTemp temp={temp_hi} />
-        <DailyForcastTemp temp={temp_lo} />
+        <WeeklyForcastTemp temp={temp_hi} />
+        <WeeklyForcastTemp temp={temp_lo} />
       </div>
     </div>
   );
 };
 
-DailyForcast.propTypes = {
+WeeklyForcast.propTypes = {
   data: PropTypes.object.isRequired
 };
 
-const DailyForcastDay = props => {
+const WeeklyForcastDay = props => {
   const { text } = props;
   return <div>{text}</div>;
 };
 
-DailyForcastDay.propTypes = {
+WeeklyForcastDay.propTypes = {
   text: PropTypes.string.isRequired
 };
 
-const DailyForcastImage = props => {
+const WeeklyForcastImage = props => {
   const { src } = props;
   return (
     <div className="card-img-top">
@@ -52,15 +55,19 @@ const DailyForcastImage = props => {
     </div>
   );
 };
-DailyForcastImage.propTypes = {
+WeeklyForcastImage.propTypes = {
   src: PropTypes.string.isRequired
 };
 
-const DailyForcastTemp = props => {
+const WeeklyForcastTemp = props => {
   const { temp } = props;
   return <span style={{ paddingLeft: 5, paddingRight: 5 }}>{temp}°C</span>;
 };
 
-DailyForcastTemp.propTypes = {
+WeeklyForcastTemp.propTypes = {
   temp: PropTypes.number
+};
+
+const DailyForcast = props => {
+  return <div>test</div>;
 };
