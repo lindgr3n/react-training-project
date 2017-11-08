@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './WeatherChannel.css';
-import wheatherReport from './weatherreport';
+import { DATA_WEEKLY } from './weatherreport';
 
 class WeatherChannel extends Component {
   render() {
@@ -10,7 +10,7 @@ class WeatherChannel extends Component {
     return (
       <div>
         <div className="card-group">
-          {wheatherReport.days.map(day => {
+          {DATA_WEEKLY.days.map(day => {
             return <WeeklyForcast key={day.day} data={day} onClick={onDayClick} />;
           })}
         </div>
@@ -18,6 +18,10 @@ class WeatherChannel extends Component {
     );
   }
 }
+
+WeatherChannel.propTypes = {
+  onDayClick: PropTypes.func.isRequired
+};
 
 export default WeatherChannel;
 
