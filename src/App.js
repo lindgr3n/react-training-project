@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import WeatherChannel from './WeatherChannel/WeatherChannel';
+import WeatherChannelApp from './WeatherChannel/WeatherChannelApp';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <h1 className="App-title">Veckans väder</h1>
-        <WeatherChannel />
+        <WeatherChannelApp />
       </div>
     );
   }

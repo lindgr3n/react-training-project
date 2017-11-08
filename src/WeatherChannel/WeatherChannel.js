@@ -4,38 +4,15 @@ import './WeatherChannel.css';
 import wheatherReport from './weatherreport';
 
 class WeatherChannel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      daytoshow: {},
-      showdailyforcast: false
-    };
-    this.showDailyForcast = this.showDailyForcast.bind(this);
-  }
-
-  showDailyForcast(evt) {
-    console.log('this', this);
-    console.log('evt', evt);
-
-    let dayToShow = this.state.daytoshow;
-    let showDailyForcast = false;
-
-    if (!dayToShow || dayToShow.day != evt.data.day || !this.state.showdailyforcast) {
-      showDailyForcast = true;
-    }
-
-    this.setState({ daytoshow: evt.data, showdailyforcast: showDailyForcast });
-  }
   render() {
+    console.log(this.props);
+    const { onDayClick } = this.props;
     return (
       <div>
         <div className="card-group">
           {wheatherReport.days.map(day => {
-            return <WeeklyForcast key={day.day} data={day} onClick={this.showDailyForcast} />;
+            return <WeeklyForcast key={day.day} data={day} onClick={onDayClick} />;
           })}
-        </div>
-        <div className={this.state.showdailyforcast ? '' : 'hidden'}>
-          <DailyForcast data={this.state.daytoshow} />
         </div>
       </div>
     );
@@ -91,10 +68,4 @@ const WeeklyForcastTemp = props => {
 
 WeeklyForcastTemp.propTypes = {
   temp: PropTypes.number
-};
-
-const DailyForcast = props => {
-  const { data } = props;
-  console.log(data);
-  return <div>{data.day}</div>;
 };
