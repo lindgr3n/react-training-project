@@ -4,14 +4,38 @@ import './WeatherChannel.css';
 import wheatherReport from './weatherreport';
 
 class WeatherChannel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      daytoshow: {},
+      showdailyforcast: false
+    };
+    this.showDailyForcast = this.showDailyForcast.bind(this);
+  }
+
+  showDailyForcast(evt) {
+    console.log('this', this);
+    console.log('evt', evt);
+
+    let dayToShow = this.state.daytoshow;
+    let showDailyForcast = false;
+
+    if (!dayToShow || dayToShow.day != evt.data.day || !this.state.showdailyforcast) {
+      showDailyForcast = true;
+    }
+
+    this.setState({ daytoshow: evt.data, showdailyforcast: showDailyForcast });
+  }
   render() {
     return (
-      <div className="card-group">
-        {wheatherReport.days.map(day => {
-          return <WeeklyForcast key={day.day} data={day} />;
-        })}
-        <div className="hidden">
-          <DailyForcast />
+      <div>
+        <div className="card-group">
+          {wheatherReport.days.map(day => {
+            return <WeeklyForcast key={day.day} data={day} onClick={this.showDailyForcast} />;
+          })}
+        </div>
+        <div className={this.state.showdailyforcast ? '' : 'hidden'}>
+          <DailyForcast data={this.state.daytoshow} />
         </div>
       </div>
     );
@@ -23,7 +47,7 @@ export default WeatherChannel;
 const WeeklyForcast = props => {
   const { day, img, temp_hi, temp_lo } = props.data;
   return (
-    <div className="card w-20">
+    <div className="card w-20" onClick={e => props.onClick(props, e)}>
       <WeeklyForcastDay text={day} />
       <WeeklyForcastImage src={img} />
       <div className="card-body">
@@ -35,7 +59,8 @@ const WeeklyForcast = props => {
 };
 
 WeeklyForcast.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 const WeeklyForcastDay = props => {
@@ -69,5 +94,7 @@ WeeklyForcastTemp.propTypes = {
 };
 
 const DailyForcast = props => {
-  return <div>test</div>;
+  const { data } = props;
+  console.log(data);
+  return <div>{data.day}</div>;
 };
