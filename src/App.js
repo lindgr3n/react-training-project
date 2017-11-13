@@ -1,46 +1,46 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import './App.css';
 
 import WeatherChannelApp from './WeatherChannel/WeatherChannelApp';
 import CalculatorApp from './Calculator/CalculatorApp';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      view: ''
-    };
-  }
-  changeView(e) {
-    console.log(e.target);
-    this.setState({
-      view: e.target.className
-    });
-  }
-
   render() {
     return (
-      <div>
-        <div className="App">
-          <div className="App-item one" onClick={e => this.changeView(e)}>
-            WeatherChannel
+      <Router>
+        <div>
+          <div className="App">
+            <ul className="nav nav-pills">
+              <li className="nav-item">
+                <NavLink className="nav-link" activeClassName="active" exact to="/">
+                  Home
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" activeClassName="active" to="/Weather">
+                  Weather Channel
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" activeClassName="active" to="/Calculator">
+                  Calculator
+                </NavLink>
+              </li>
+            </ul>
           </div>
-          <div className="App-item two" onClick={e => this.changeView(e)}>
-            Calculator
-          </div>
+
+          <Route exact path="/" component={Home} />
+          <Route path="/Weather" component={WeatherChannelApp} />
+          <Route exact path="/Calculator" component={CalculatorApp} />
         </div>
-        <br className="clearfix" />
-        <div className="content">
-          <div className={this.state.view !== 'App-item one' ? 'hidden' : ''}>
-            <WeatherChannelApp />
-          </div>
-          <div className={this.state.view !== 'App-item two' ? 'hidden' : ''}>
-            <CalculatorApp />
-          </div>
-        </div>
-      </div>
+      </Router>
     );
   }
 }
 
 export default App;
+
+const Home = props => {
+  return <div>Show some thumbnails and small info!</div>;
+};
