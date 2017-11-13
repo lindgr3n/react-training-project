@@ -11,3 +11,17 @@
   font-size: large;
 }
 
+.App-item {
+  cursor: pointer;
+  float: left;
+  padding: 20px;
+
+}
+
+.hidden {
+  display: none;
+}
+
+.clearfix {
+  clear: both;
+}
