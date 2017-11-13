@@ -4,6 +4,7 @@ import './App.css';
 
 import WeatherChannelApp from './WeatherChannel/WeatherChannelApp';
 import CalculatorApp from './Calculator/CalculatorApp';
+import HackerHunt from './HackerHunt/HackerHuntApp';
 
 class App extends Component {
   render() {
@@ -27,12 +28,18 @@ class App extends Component {
                   Calculator
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" activeClassName="active" to="/HackerHunt">
+                  HackerHunt clone
+                </NavLink>
+              </li>
             </ul>
           </div>
 
           <Route exact path="/" component={Home} />
           <Route path="/Weather" component={WeatherChannelApp} />
           <Route exact path="/Calculator" component={CalculatorApp} />
+          <Route exact path="/HackerHunt" component={HackerHunt} />
         </div>
       </Router>
     );
