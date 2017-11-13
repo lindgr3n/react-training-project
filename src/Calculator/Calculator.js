@@ -2,11 +2,11 @@ import React from 'react';
 import './Calculator.css';
 
 const Calculator = props => {
-  const { result, valueClick } = props;
+  const { result, valueClick, operator } = props;
   return (
     <div className="grid">
       <div className="result">
-        <Result value={result} />
+        <Result value={result} operator={operator} />
       </div>
       <div className="button clear">
         <CalculatorButton value="Clear" onClick={valueClick} />
@@ -65,6 +65,10 @@ const CalculatorButton = props => {
 };
 
 const Result = props => {
-  const { value } = props;
-  return <div>{value}</div>;
+  const { value, operator = '' } = props;
+  return (
+    <div style={{ verticalAlign: 'middle' }}>
+      {value} <span style={{ fontSize: 8 }}>{operator}</span>
+    </div>
+  );
 };

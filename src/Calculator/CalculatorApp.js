@@ -22,8 +22,13 @@ class CaclculatorApp extends Component {
     if (operator) {
       if (operator === 'Clear') {
         this.setState({
-          operator: '+',
+          operator: '',
           result: 0
+        });
+        return;
+      } else if (operator === '=') {
+        this.setState({
+          operator: ''
         });
         return;
       }
@@ -79,7 +84,7 @@ class CaclculatorApp extends Component {
   }
  */
   render() {
-    return <Calculator result={this.state.result} valueClick={this.valueClick} />;
+    return <Calculator operator={this.state.operator} result={this.state.result} valueClick={this.valueClick} />;
   }
 }
 
