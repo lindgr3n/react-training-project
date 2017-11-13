@@ -12,10 +12,9 @@ class CaclculatorApp extends Component {
       operator: ''
     };
     this.valueClick = this.valueClick.bind(this);
-    // this.operatorClick = this.operatorClick.bind(this);
   }
   valueClick(value) {
-    console.log(value);
+    // console.log(value);
     let result = parseInt(this.state.result);
     let operator = this.isOperator(value);
 
@@ -68,21 +67,6 @@ class CaclculatorApp extends Component {
     return operators.find(e => e === value);
   }
 
-  /* operatorClick(value) {
-    console.log('operator: ' + value);
-
-    if (value === 'Clear') {
-      this.setState({
-        operator: '+',
-        result: 0
-      });
-    } else {
-      this.setState({
-        operator: value
-      });
-    }
-  }
- */
   render() {
     return <Calculator operator={this.state.operator} result={this.state.result} valueClick={this.valueClick} />;
   }
