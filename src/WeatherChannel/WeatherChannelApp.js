@@ -3,6 +3,16 @@ import './WeatherChannel.css';
 
 import WeatherChannel from './WeatherChannel';
 
+/*
+TODO:
+  • Click on a day to see its hourly forecast (maintain
+  the current view in the top-level App state)
+  • Use React Router to map / to the full forecast and
+  /name-of-day to that day’s hourly forecast.
+  • Sign up for a free API key from Open Weather Map
+  and fetch a real 5-day forecast 
+*/
+
 class WeatherChannelApp extends Component {
   constructor(props) {
     super(props);
