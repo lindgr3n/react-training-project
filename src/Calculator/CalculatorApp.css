@@ -4,6 +4,8 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(25px, auto);
+  border: rgb(48, 46, 46) solid;
+  padding: 5px
 }
 
 .button {
