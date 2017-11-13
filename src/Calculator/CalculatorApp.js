@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import './CalculatorApp.css';
+
+import Calculator from './Calculator';
+
+const operators = ['%', '+', '-', 'Clear', '='];
 
 class CaclculatorApp extends Component {
   constructor(props) {
@@ -9,19 +12,30 @@ class CaclculatorApp extends Component {
       operator: ''
     };
     this.valueClick = this.valueClick.bind(this);
-    this.operatorClick = this.operatorClick.bind(this);
+    // this.operatorClick = this.operatorClick.bind(this);
   }
   valueClick(value) {
     console.log(value);
     let result = parseInt(this.state.result);
+    let operator = this.isOperator(value);
 
-    if (!this.state.operator) {
+    if (operator) {
+      if (operator === 'Clear') {
+        this.setState({
+          operator: '+',
+          result: 0
+        });
+        return;
+      }
       this.setState({
-        result: value
+        operator: value
       });
       return;
+    } else {
+      operator = this.state.operator;
     }
-    switch (this.state.operator) {
+
+    switch (operator) {
       case '%':
         this.setState({
           result: result / parseInt(value)
@@ -37,13 +51,19 @@ class CaclculatorApp extends Component {
           result: result + parseInt(value)
         });
         break;
-
       default:
+        this.setState({
+          result: value
+        });
         break;
     }
   }
 
-  operatorClick(value) {
+  isOperator(value) {
+    return operators.find(e => e === value);
+  }
+
+  /* operatorClick(value) {
     console.log('operator: ' + value);
 
     if (value === 'Clear') {
@@ -57,71 +77,10 @@ class CaclculatorApp extends Component {
       });
     }
   }
-
+ */
   render() {
-    return (
-      <div className="grid">
-        <div className="result">
-          <Result value={this.state.result} />
-        </div>
-        <div className="button clear">
-          <CalculatorButton value="Clear" onClick={this.operatorClick} />
-        </div>
-        <div className="button del operator">
-          <CalculatorButton value="%" onClick={this.operatorClick} />
-        </div>
-
-        <div className="button seven">
-          <CalculatorButton value="7" onClick={this.valueClick} />
-        </div>
-        <div className="button eight">
-          <CalculatorButton value="8" onClick={this.valueClick} />
-        </div>
-        <div className="button nine">
-          <CalculatorButton value="9" onClick={this.valueClick} />
-        </div>
-        <div className="button remove operator">
-          <CalculatorButton value="-" onClick={this.operatorClick} />
-        </div>
-
-        <div className="button four">
-          <CalculatorButton value="4" onClick={this.valueClick} />
-        </div>
-        <div className="button five">
-          <CalculatorButton value="5" onClick={this.valueClick} />
-        </div>
-        <div className="button six">
-          <CalculatorButton value="6" onClick={this.valueClick} />
-        </div>
-        <div className="button add operator">
-          <CalculatorButton value="+" onClick={this.operatorClick} />
-        </div>
-
-        <div className="button one">
-          <CalculatorButton value="1" onClick={this.valueClick} />
-        </div>
-        <div className="button two">
-          <CalculatorButton value="2" onClick={this.valueClick} />
-        </div>
-        <div className="button three">
-          <CalculatorButton value="3" onClick={this.valueClick} />
-        </div>
-        <div className="button equal operator">
-          <CalculatorButton value="=" onClick={this.operatorClick} />
-        </div>
-      </div>
-    );
+    return <Calculator result={this.state.result} valueClick={this.valueClick} />;
   }
 }
 
 export default CaclculatorApp;
-
-const CalculatorButton = props => {
-  const { value, onClick } = props;
-  return <div onClick={() => onClick(value)}>{value}</div>;
-};
-
-const Result = props => {
-  const { value } = props;
-  return <div>{value}</div>;
-};
