@@ -15,39 +15,39 @@ const Calculator = props => {
         <CalculatorButton value="%" onClick={valueClick} />
       </div>
 
-      <div className="button seven">
+      <div className="button value seven">
         <CalculatorButton value="7" onClick={valueClick} />
       </div>
-      <div className="button eight">
+      <div className="button value eight">
         <CalculatorButton value="8" onClick={valueClick} />
       </div>
-      <div className="button nine">
+      <div className="button value nine">
         <CalculatorButton value="9" onClick={valueClick} />
       </div>
       <div className="button remove operator">
         <CalculatorButton value="-" onClick={valueClick} />
       </div>
 
-      <div className="button four">
+      <div className="button value four">
         <CalculatorButton value="4" onClick={valueClick} />
       </div>
-      <div className="button five">
+      <div className="button value five">
         <CalculatorButton value="5" onClick={valueClick} />
       </div>
-      <div className="button six">
+      <div className="button value six">
         <CalculatorButton value="6" onClick={valueClick} />
       </div>
       <div className="button add operator">
         <CalculatorButton value="+" onClick={valueClick} />
       </div>
 
-      <div className="button one">
+      <div className="button value one">
         <CalculatorButton value="1" onClick={valueClick} />
       </div>
-      <div className="button two">
+      <div className="button value two">
         <CalculatorButton value="2" onClick={valueClick} />
       </div>
-      <div className="button three">
+      <div className="button value three">
         <CalculatorButton value="3" onClick={valueClick} />
       </div>
       <div className="button equal operator">

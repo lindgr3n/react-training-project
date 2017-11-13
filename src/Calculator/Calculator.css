@@ -21,6 +21,11 @@
 
 .operator {
   background-color: red;
+  text-align: center;
+}
+
+.value {
+  text-align: center;
 }
 
 .result {
@@ -36,6 +41,7 @@
 .clear { 
   grid-column: 1 / 4;
   grid-row: 2;
+  text-align: center;
 }
 .del {
   grid-column: 4 / 4;
