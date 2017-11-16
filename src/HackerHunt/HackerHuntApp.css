@@ -57,3 +57,21 @@ h3 {
   grid-column: 2/4;
   grid-row: 2;
 } */
+
+.news-siderbar {
+  padding-right: 10px;
+}
+.news-container {
+  padding: 20px;
+}
+.news-sidebar {
+  padding-right: 20px;
+}
+
+.news-tag {
+  border: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+.border {
+  border: solid;
+}
