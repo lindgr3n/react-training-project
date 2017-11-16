@@ -8,13 +8,25 @@ class HackerHuntApp extends Component {
   render() {
     return (
       <div className="wrapper">
-        <div className="header">Header</div>
-        <div className="sidebar">
+        <header className="header">
+          Header <input />
+        </header>
+
+        <aside className="sidebar">
+          <header>
+            <h3>TOPICS</h3>
+          </header>
           <Topics data={TOPICS_DATA} />
-        </div>
-        <div className="content">
+        </aside>
+        <div className="news">
+          <header>
+            <h3>Today</h3> <h3>Popular</h3>
+          </header>
+
           <h1>Main article area</h1>
         </div>
+
+        <div className="footer">footer</div>
       </div>
     );
   }

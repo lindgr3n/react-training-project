@@ -4,8 +4,12 @@ export const TOPICS_DATA = [
     name: 'Development'
   },
   {
-    icon: 'tools',
+    icon: 'wrench',
     name: 'System'
+  },
+  {
+    icon: 'tools',
+    name: 'Tools'
   },
   {
     icon: 'data',
