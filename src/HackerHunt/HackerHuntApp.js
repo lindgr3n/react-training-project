@@ -14,13 +14,13 @@ class HackerHuntApp extends Component {
 
         <aside className="sidebar">
           <header>
-            <h3>TOPICS</h3>
+            <h3 className="columnheader">TOPICS</h3>
           </header>
           <Topics data={TOPICS_DATA} />
         </aside>
         <div className="news">
           <header>
-            <h3>Today</h3> <h3>Popular</h3>
+            <h3 className="columnheader">Today</h3> <h3 className="columnheader">Popular</h3>
           </header>
 
           <NeewsFeedList data={NEWSFEED_DATA} />
@@ -61,18 +61,18 @@ const NeewsItem = props => {
     <div className="news-container clearfix">
       <div className="news-sidebar float-left p20">
         <div className="news-ups">
-          <span>u</span>
-          {item.ups}
+          <span className="fa fa-sort-asc fa-2x" />
+          <span className="float-left">{item.ups}</span>
         </div>
-        <div>
-          <span className="news-comments">c</span>
-          {item.comments}
+        <div className="news-comments">
+          <span className="fa fa-sort-asc fa-2x" />
+          <span className="float-left">{item.comments}</span>
         </div>
       </div>
-      <div className="news-content float-left">
+      <div className="news-content">
         <header>
-          {item.name}
-          <span>{item.stared}</span>
+          <h3 className="float-left">{item.name}</h3>
+          <span className={'float-left ' + item.stared ? 'fa fa-star' : ''} />
         </header>
         {item.descr}
         <div className="news-footer">
