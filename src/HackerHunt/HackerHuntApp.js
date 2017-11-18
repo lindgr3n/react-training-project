@@ -37,14 +37,7 @@ class HackerHuntApp extends Component {
           <aside className="">
             <div>
               <h3>Topics</h3>
-              <nav>
-                <div>
-                  <a className="" href="/topic/development/trending">
-                    <span className="thumb development" />
-                    <strong>Development</strong>
-                  </a>
-                </div>
-              </nav>
+              <Topics data={TOPICS_DATA} />
             </div>
           </aside>
           <div className="list">
@@ -58,52 +51,8 @@ class HackerHuntApp extends Component {
                 </ul>
               </div>
             </header>
-            <div>
-              <article>
-                <a href="//news.ycombinator.com/item?id=15718337" target="_blank">
-                  <span>
-                    <em>▲</em>
-                    55
-                  </span>
-                  <span>
-                    <em>
-                      <svg className="comment-12" width="12" height="12" xmlns="http://www.w3.org/2000/svg">
-                        <g>
-                          <path d="M3.175 9.412c.842.375 1.803.588 2.825.588 3.314 0 6-2.239 6-5s-2.686-5-6-5-6 2.239-6 5c0 1.052.39 2.028 1.056 2.833l-1.056 3.167 3.175-1.588z" />
-                        </g>
-                      </svg>
-                    </em>
-                  </span>
-                </a>
-                <div>
-                  <h2>
-                    <a href="https://github.com/maxchehab/quickfix#quickfix" target="_blank">
-                      Quickfix
-                    </a>
-                    <sup>
-                      <span>This submission has been on Hacker News front page</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11">
-                        <path fill="#ff6600" d="M6 9l-3.527 1.854.674-3.927-2.853-2.781 3.943-.573 1.763-3.573 1.763 3.573 3.943.573-2.853 2.781.674 3.927z" />
-                      </svg>
-                    </sup>
-                  </h2>
-                  <p className="desc">the best stupid idea for fixing problems in node modules</p>
-                  <summary>
-                    <time>18 hours ago</time>
-                    by
-                    <a href="/author/flaque">flaque</a>
-                    <a className="tag" href="/topic/media/trending">
-                      media
-                    </a>
-                    <a className="tag" href="/topic/open-source/trending">
-                      open-source
-                    </a>
-                    <a className="tag" href="/topic/javascript/trending">
-                      javascript
-                    </a>
-                  </summary>
-                </div>
-              </article>
+            <div className="list">
+              <NeewsFeedList data={NEWSFEED_DATA} />
               <strong className="expand-link">Show 11 more</strong>
             </div>
             <footer>
@@ -139,17 +88,13 @@ const NeewsFeedList = props => {
   const { data } = props;
   return (
     <div className="list">
-      <header data-reactid="70">
-        <h3 data-reactid="71">Today</h3>
-        <div className="dropdown off" data-reactid="72">
-          <strong data-reactid="73">popular</strong>
-          <ul data-reactid="74">
-            <a href="/newest" data-reactid="75">
-              Newest
-            </a>
-            <a href="/comments" data-reactid="76">
-              Comments
-            </a>
+      <header>
+        <h3>Today</h3>
+        <div className="dropdown off">
+          <strong>popular</strong>
+          <ul>
+            <a href="/newest">Newest</a>
+            <a href="/comments">Comments</a>
           </ul>
         </div>
       </header>
@@ -166,16 +111,24 @@ const NeewsItem = props => {
     <article>
       <a href="#" target="_blank">
         <span>
-          <em>▲</em>25
+          <em>▲</em>
+          {item.ups}
         </span>
         <span>
-          <em className="fa fa-comment" />21
+          <em>
+            <svg className="comment-12" width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <path d="M3.175 9.412c.842.375 1.803.588 2.825.588 3.314 0 6-2.239 6-5s-2.686-5-6-5-6 2.239-6 5c0 1.052.39 2.028 1.056 2.833l-1.056 3.167 3.175-1.588z" />
+              </g>
+            </svg>
+          </em>
+          {item.comments}
         </span>
       </a>
       <div>
         <h2>
           <a href="#" target="_blank">
-            AspectRat.io
+            {item.name}
           </a>
           <sup>
             <span>This submission has been on Hacker News front page</span>
@@ -184,19 +137,29 @@ const NeewsItem = props => {
             </svg>
           </sup>
         </h2>
-        <p className="desc">Aspect ratio calculator and device resolutions resource</p>
+        <p className="desc">{item.descr}</p>
         <summary>
-          <time>7 hours ago</time>
-          <a href="#">ryanhefner</a>
-          <a className="tag" href="#">
-            system
-          </a>
-          <a className="tag" href="#">
-            visual
-          </a>
+          <time>18 hours ago</time>
+          by
+          <a href="/author/flaque">flaque</a>
+          <NewsTagList tags={item.tags} />
         </summary>
       </div>
     </article>
+  );
+};
+
+const NewsTagList = props => {
+  const { tags } = props;
+  return tags.map((tag, i) => <NewsTagItem key={i} tag={tag} />);
+};
+
+const NewsTagItem = props => {
+  const { tag } = props;
+  return (
+    <a className="tag" href="#">
+      {tag}
+    </a>
   );
 };
 
