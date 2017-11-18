@@ -67,7 +67,7 @@ const TopicItem = props => {
   return (
     <div>
       <a className="" href="#">
-        <span className="thumb development" />
+        <span className={'thumb ' + item.icon} />
         <strong>{item.name}</strong>
       </a>
     </div>

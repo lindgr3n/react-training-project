@@ -1,10 +1,10 @@
 export const TOPICS_DATA = [
   {
-    icon: 'rocket',
+    icon: 'development',
     name: 'Development'
   },
   {
-    icon: 'wrench',
+    icon: 'system',
     name: 'System'
   },
   {
@@ -12,11 +12,11 @@ export const TOPICS_DATA = [
     name: 'Tools'
   },
   {
-    icon: 'data',
+    icon: 'data-science',
     name: 'Daata science'
   },
   {
-    icon: 'chain',
+    icon: 'blockchain',
     name: 'Blockchain'
   },
   {
@@ -24,7 +24,7 @@ export const TOPICS_DATA = [
     name: 'Mobile'
   },
   {
-    icon: 'star',
+    icon: 'list',
     name: 'Awesome lists'
   },
   {
@@ -32,15 +32,15 @@ export const TOPICS_DATA = [
     name: 'Social'
   },
   {
-    icon: 'frame',
+    icon: 'visual',
     name: 'Visual'
   },
   {
-    icon: 'beer',
+    icon: 'open-source',
     name: 'Open source'
   },
   {
-    icon: 'chest',
+    icon: 'all',
     name: 'All topics'
   }
 ];
