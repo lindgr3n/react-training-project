@@ -41,16 +41,6 @@ class HackerHuntApp extends Component {
             </div>
           </aside>
           <div className="list">
-            <header>
-              <h3>Today</h3>
-              <div className="dropdown off">
-                <strong>popular</strong>
-                <ul>
-                  <a href="/newest">Newest</a>
-                  <a href="/comments">Comments</a>
-                </ul>
-              </div>
-            </header>
             <div className="list">
               <NeewsFeedList data={NEWSFEED_DATA} />
               <strong className="expand-link">Show 11 more</strong>
@@ -139,9 +129,9 @@ const NeewsItem = props => {
         </h2>
         <p className="desc">{item.descr}</p>
         <summary>
-          <time>18 hours ago</time>
+          <time>{item.modified}</time>
           by
-          <a href="/author/flaque">flaque</a>
+          <a href="/author/flaque">{item.modifiedby}</a>
           <NewsTagList tags={item.tags} />
         </summary>
       </div>
