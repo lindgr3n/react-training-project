@@ -11,7 +11,7 @@ class HackerHuntApp extends Component {
         <HHHeader />
         <section>
           <HHSideBar topics={TOPICS_DATA} />
-          <HHContent news={NEWSFEED_DATA} />
+          <HHContent news={NEWSFEED_DATA.data} />
         </section>
       </div>
     );
@@ -114,7 +114,7 @@ const NewsItem = props => {
       <a href="#" target="_blank">
         <span>
           <em>▲</em>
-          {item.ups}
+          {item.votes}
         </span>
         <span>
           <em>
@@ -129,8 +129,8 @@ const NewsItem = props => {
       </a>
       <div>
         <h2>
-          <a href="#" target="_blank">
-            {item.name}
+          <a href={item.link} target="_blank">
+            {item.title}
           </a>
           <sup>
             <span>This submission has been on Hacker News front page</span>
@@ -139,11 +139,11 @@ const NewsItem = props => {
             </svg>
           </sup>
         </h2>
-        <p className="desc">{item.descr}</p>
+        <p className="desc">{item.desc}</p>
         <summary>
           <time>{item.modified}</time>
-          by
-          <a href="/author/flaque">{item.modifiedby}</a>
+          <span>by </span>
+          <a href="#">{item.author}</a>
           <NewsTagList tags={item.tags} />
         </summary>
       </div>
@@ -153,7 +153,7 @@ const NewsItem = props => {
 
 const NewsTagList = props => {
   const { tags } = props;
-  return tags.map((tag, i) => <NewsTagItem key={i} tag={tag} />);
+  return tags.split(',').map((tag, i) => <NewsTagItem key={i} tag={tag} />);
 };
 
 const NewsTagItem = props => {
