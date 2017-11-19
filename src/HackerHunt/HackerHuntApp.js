@@ -9,16 +9,24 @@ class HackerHuntApp extends Component {
     super(props);
     this.state = {
       topics: TOPICS_DATA,
-      news: NEWSFEED_DATA
+      news: NEWSFEED_DATA,
+      numberOfItemsToShow: 10
     };
+
+    this.changeNumberOfItemsToShow = this.changeNumberOfItemsToShow.bind(this);
   }
+
+  changeNumberOfItemsToShow() {
+    this.setState({ numberOfItemsToShow: this.state.numberOfItemsToShow + 10 });
+  }
+
   render() {
     return (
       <div id="hh">
         <HHHeader />
         <section>
           <HHSideBar topics={this.state.topics} />
-          <HHContent news={this.state.news.data} />
+          <HHContent news={this.state.news.data} count={this.state.numberOfItemsToShow} changenumberofitemstoshow={this.changeNumberOfItemsToShow} />
         </section>
       </div>
     );
@@ -87,7 +95,10 @@ const TopicItem = props => {
 };
 
 const HHContent = props => {
-  const { news } = props;
+  const { news, count, changenumberofitemstoshow } = props;
+  const countleft = news.length - count > 10 ? 10 : news.length - count;
+  const shouldShowGetMore = countleft > 0;
+  console.log(shouldShowGetMore, countleft);
   return (
     <div className="list">
       <header>
@@ -100,8 +111,14 @@ const HHContent = props => {
           </ul>
         </div>
       </header>
-      <NewsFeedList data={news} />
-      <strong className="expand-link">Show 11 more</strong>
+      <NewsFeedList data={news} count={count} />
+      {shouldShowGetMore ? (
+        <strong className="expand-link" onClick={changenumberofitemstoshow}>
+          Show {countleft} more
+        </strong>
+      ) : (
+        ''
+      )}
       <footer>
         <a href="/page/1">Previous day</a>
       </footer>
@@ -110,8 +127,8 @@ const HHContent = props => {
 };
 
 const NewsFeedList = props => {
-  const { data } = props;
-  return data.map((newsItem, i) => <NewsItem key={i} item={newsItem} />);
+  const { data, count } = props;
+  return data.map((newsItem, i) => (i < count ? <NewsItem key={i} item={newsItem} /> : ''));
 };
 
 const NewsItem = props => {
