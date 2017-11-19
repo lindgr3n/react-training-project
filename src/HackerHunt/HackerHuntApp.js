@@ -10,14 +10,22 @@ class HackerHuntApp extends Component {
     this.state = {
       topics: TOPICS_DATA,
       news: NEWSFEED_DATA,
-      numberOfItemsToShow: 10
+      numberOfItemsToShow: 10,
+      newsfeedfilter: 'POPULAR'
     };
 
     this.changeNumberOfItemsToShow = this.changeNumberOfItemsToShow.bind(this);
+    this.filterChangeHandler = this.filterChangeHandler.bind(this);
   }
 
   changeNumberOfItemsToShow() {
     this.setState({ numberOfItemsToShow: this.state.numberOfItemsToShow + 10 });
+  }
+
+  filterChangeHandler(event) {
+    const target = event.target;
+    const eventAction = target.selectedOptions[0].attributes['tag'].value;
+    this.setState({ newsfeedfilter: eventAction });
   }
 
   render() {
@@ -26,7 +34,13 @@ class HackerHuntApp extends Component {
         <HHHeader />
         <section>
           <HHSideBar topics={this.state.topics} />
-          <HHContent news={this.state.news.data} count={this.state.numberOfItemsToShow} changenumberofitemstoshow={this.changeNumberOfItemsToShow} />
+          <HHContent
+            news={this.state.news.data}
+            count={this.state.numberOfItemsToShow}
+            changenumberofitemstoshow={this.changeNumberOfItemsToShow}
+            newsfeedfilter={this.state.newsfeedfilter}
+            filterchangehandler={this.filterChangeHandler}
+          />
         </section>
       </div>
     );
@@ -95,20 +109,14 @@ const TopicItem = props => {
 };
 
 const HHContent = props => {
-  const { news, count, changenumberofitemstoshow } = props;
+  const { news, count, changenumberofitemstoshow, newsfeedfilter, filterchangehandler } = props;
   return (
     <div className="list">
       <header>
         <h3>Today</h3>
-        <div className="dropdown off">
-          <strong>popular</strong>
-          <ul>
-            <a href="/newest">Newest</a>
-            <a href="/comments">Comments</a>
-          </ul>
-        </div>
+        <NewsFeedFilter newsfeedfilter={newsfeedfilter} filterchangehandler={filterchangehandler} />
       </header>
-      <NewsFeedList data={news} count={count} />
+      <NewsFeedList data={news} count={count} filter={newsfeedfilter} />
       <NewsFeedGetMore news={news} count={count} changenumberofitemstoshow={changenumberofitemstoshow} />
       <footer>
         <a href="/page/1">Previous day</a>
@@ -117,9 +125,38 @@ const HHContent = props => {
   );
 };
 
+const NewsFeedFilter = props => {
+  const { filterchangehandler } = props;
+  return (
+    <select className="newsfeedfilter" id="newsfilter" onChange={filterchangehandler}>
+      <option tag="votes">Popular</option>
+      <option tag="date">Newest</option>
+      <option tag="comments">Comments</option>
+    </select>
+  );
+};
+
 const NewsFeedList = props => {
-  const { data, count } = props;
-  return data.map((newsItem, i) => (i < count ? <NewsItem key={i} item={newsItem} /> : ''));
+  const { data, count, filter } = props;
+  const votesSort = (a, b) => (parseInt(a.votes) > parseInt(b.votes) ? -1 : 1);
+  const newestSort = (a, b) => (parseInt(a.date) > parseInt(b.date) ? -1 : 1);
+  const commentsSort = (a, b) => (parseInt(a.comments) > parseInt(b.comments) ? -1 : 1);
+  let sortFunction = votesSort;
+  switch (filter) {
+    case 'votes':
+      sortFunction = votesSort;
+      break;
+    case 'date':
+      sortFunction = newestSort;
+      break;
+    case 'comments':
+      sortFunction = commentsSort;
+      break;
+    default:
+      break;
+  }
+  const list = data.sort(sortFunction);
+  return list.map((newsItem, i) => (i < count ? <NewsItem key={i} item={newsItem} /> : ''));
 };
 
 const NewsItem = props => {
@@ -156,8 +193,8 @@ const NewsItem = props => {
         </h2>
         <p className="desc">{item.desc}</p>
         <summary>
-          <time>{item.modified}</time>
-          <span>by </span>
+          <time>{item.date}</time>
+          <span> by </span>
           <a href="#">{item.author}</a>
           <NewsTagList tags={item.tags} />
         </summary>
