@@ -5,13 +5,20 @@ import { NEWSFEED_DATA, TOPICS_DATA } from './data';
 import './HackerHuntApp.css';
 
 class HackerHuntApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      topics: TOPICS_DATA,
+      news: NEWSFEED_DATA
+    };
+  }
   render() {
     return (
       <div id="hh">
         <HHHeader />
         <section>
-          <HHSideBar topics={TOPICS_DATA} />
-          <HHContent news={NEWSFEED_DATA.data} />
+          <HHSideBar topics={this.state.topics} />
+          <HHContent news={this.state.news.data} />
         </section>
       </div>
     );
