@@ -96,9 +96,6 @@ const TopicItem = props => {
 
 const HHContent = props => {
   const { news, count, changenumberofitemstoshow } = props;
-  const countleft = news.length - count > 10 ? 10 : news.length - count;
-  const shouldShowGetMore = countleft > 0;
-  console.log(shouldShowGetMore, countleft);
   return (
     <div className="list">
       <header>
@@ -112,13 +109,7 @@ const HHContent = props => {
         </div>
       </header>
       <NewsFeedList data={news} count={count} />
-      {shouldShowGetMore ? (
-        <strong className="expand-link" onClick={changenumberofitemstoshow}>
-          Show {countleft} more
-        </strong>
-      ) : (
-        ''
-      )}
+      <NewsFeedGetMore news={news} count={count} changenumberofitemstoshow={changenumberofitemstoshow} />
       <footer>
         <a href="/page/1">Previous day</a>
       </footer>
@@ -186,5 +177,23 @@ const NewsTagItem = props => {
     <a className="tag" href="#">
       {tag}
     </a>
+  );
+};
+
+const NewsFeedGetMore = props => {
+  const { news, count, changenumberofitemstoshow } = props;
+  const countleft = news.length - count > 10 ? 10 : news.length - count;
+  const shouldShowGetMore = countleft > 0;
+  console.log(shouldShowGetMore, countleft);
+  return (
+    <div>
+      {shouldShowGetMore ? (
+        <strong className="expand-link" onClick={changenumberofitemstoshow}>
+          Show {countleft} more
+        </strong>
+      ) : (
+        ''
+      )}
+    </div>
   );
 };
