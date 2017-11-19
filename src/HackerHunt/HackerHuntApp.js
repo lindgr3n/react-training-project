@@ -49,6 +49,7 @@ class HackerHuntApp extends Component {
 
 export default HackerHuntApp;
 
+// Search query https://hn.algolia.com/api/v1/search?query=app&tags=show_hn
 const HHHeader = props => {
   return (
     <header>
