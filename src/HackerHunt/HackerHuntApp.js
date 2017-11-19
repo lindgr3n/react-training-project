@@ -4,6 +4,7 @@ import { NEWSFEED_DATA, TOPICS_DATA } from './data';
 
 import './HackerHuntApp.css';
 
+// Intial call https://hackerhunt.co/api/daily/0
 class HackerHuntApp extends Component {
   constructor(props) {
     super(props);
