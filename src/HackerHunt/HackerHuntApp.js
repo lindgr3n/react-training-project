@@ -219,7 +219,7 @@ const NewsFeedList = props => {
       break;
   }
   const list = data.sort(sortFunction);
-  return list.map((newsItem, i) => (i < count ? <NewsItem key={i} item={newsItem} /> : ''));
+  return list.map((newsItem, i) => (i < count ? <NewsItem key={newsItem.id} item={newsItem} /> : ''));
 };
 
 const NewsItem = props => {
