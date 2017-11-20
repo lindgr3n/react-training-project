@@ -13,7 +13,8 @@ class HackerHuntApp extends Component {
       topics: TOPICS_DATA,
       news: [],
       numberOfItemsToShow: 10,
-      newsfeedfilter: 'POPULAR'
+      newsfeedfilter: 'POPULAR',
+      isLoading: false
     };
 
     this.changeNumberOfItemsToShow = this.changeNumberOfItemsToShow.bind(this);
@@ -21,11 +22,12 @@ class HackerHuntApp extends Component {
   }
 
   async componentDidMount() {
+    this.setState({ isLoading: true });
     const response = await fetch(URL);
     const data = await response.json();
-    console.log('response', data.data);
     this.setState({
-      news: data.data
+      news: data.data,
+      isLoading: false
     });
   }
 
@@ -51,6 +53,7 @@ class HackerHuntApp extends Component {
             changenumberofitemstoshow={this.changeNumberOfItemsToShow}
             newsfeedfilter={this.state.newsfeedfilter}
             filterchangehandler={this.filterChangeHandler}
+            isLoading={this.state.isLoading}
           />
         </section>
       </div>
@@ -121,7 +124,16 @@ const TopicItem = props => {
 };
 
 const HHContent = props => {
-  const { news, count, changenumberofitemstoshow, newsfeedfilter, filterchangehandler } = props;
+  const { news, count, changenumberofitemstoshow, newsfeedfilter, filterchangehandler, isLoading } = props;
+
+  if (isLoading) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="list">
       <header>
