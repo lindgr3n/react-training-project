@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { NEWSFEED_DATA, TOPICS_DATA } from './data';
+import { /* NEWSFEED_DATA, */ TOPICS_DATA } from './data';
 
 import './HackerHuntApp.css';
 
@@ -233,7 +233,6 @@ const NewsFeedGetMore = props => {
   const { news, count, changenumberofitemstoshow } = props;
   const countleft = news.length - count > 10 ? 10 : news.length - count;
   const shouldShowGetMore = countleft > 0;
-  console.log(shouldShowGetMore, countleft);
   return (
     <div>
       {shouldShowGetMore ? (
