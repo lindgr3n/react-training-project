@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { /* NEWSFEED_DATA, */ TOPICS_DATA } from './data';
 
@@ -118,9 +119,17 @@ const HHSideBar = props => {
   );
 };
 
+HHSideBar.propTypes = {
+  topics: PropTypes.array
+};
+
 const Topics = props => {
   const { data } = props;
   return <nav>{data.map(e => <TopicItem key={e.name} item={e} />)}</nav>;
+};
+
+Topics.propTypes = {
+  data: PropTypes.array
 };
 
 const TopicItem = props => {
@@ -133,6 +142,10 @@ const TopicItem = props => {
       </a>
     </div>
   );
+};
+
+TopicItem.propTypes = {
+  item: PropTypes.object
 };
 
 const HHContent = props => {
@@ -161,6 +174,16 @@ const HHContent = props => {
   );
 };
 
+HHContent.propTypes = {
+  news: PropTypes.array,
+  count: PropTypes.number,
+  changenumberofitemstoshow: PropTypes.func,
+  newsfeedfilter: PropTypes.string,
+  filterchangehandler: PropTypes.func,
+  isLoading: PropTypes.bool,
+  onChangeDayHandler: PropTypes.func
+};
+
 const NewsFeedFilter = props => {
   const { filterchangehandler } = props;
   return (
@@ -170,6 +193,10 @@ const NewsFeedFilter = props => {
       <option tag="comments">Comments</option>
     </select>
   );
+};
+
+NewsFeedFilter.propTypes = {
+  filterchangehandler: PropTypes.func
 };
 
 const NewsFeedList = props => {
@@ -239,6 +266,10 @@ const NewsItem = props => {
   );
 };
 
+NewsItem.propTypes = {
+  item: PropTypes.object
+};
+
 const NewsTagList = props => {
   const { tags } = props;
   return tags.split(',').map((tag, i) => <NewsTagItem key={i} tag={tag} />);
@@ -251,6 +282,10 @@ const NewsTagItem = props => {
       {tag}
     </a>
   );
+};
+
+NewsTagItem.propTypes = {
+  tag: PropTypes.string
 };
 
 const NewsFeedGetMore = props => {
@@ -268,4 +303,10 @@ const NewsFeedGetMore = props => {
       )}
     </div>
   );
+};
+
+NewsFeedGetMore.propTypes = {
+  news: PropTypes.array,
+  count: PropTypes.number,
+  changenumberofitemstoshow: PropTypes.func
 };
