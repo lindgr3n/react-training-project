@@ -4,19 +4,29 @@ import { NEWSFEED_DATA, TOPICS_DATA } from './data';
 
 import './HackerHuntApp.css';
 
-// Intial call https://hackerhunt.co/api/daily/0
+const URL = 'https://hackerhunt.co/api/daily/0';
+
 class HackerHuntApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
       topics: TOPICS_DATA,
-      news: NEWSFEED_DATA,
+      news: [],
       numberOfItemsToShow: 10,
       newsfeedfilter: 'POPULAR'
     };
 
     this.changeNumberOfItemsToShow = this.changeNumberOfItemsToShow.bind(this);
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
+  }
+
+  async componentDidMount() {
+    const response = await fetch(URL);
+    const data = await response.json();
+    console.log('response', data.data);
+    this.setState({
+      news: data.data
+    });
   }
 
   changeNumberOfItemsToShow() {
@@ -36,7 +46,7 @@ class HackerHuntApp extends Component {
         <section>
           <HHSideBar topics={this.state.topics} />
           <HHContent
-            news={this.state.news.data}
+            news={this.state.news}
             count={this.state.numberOfItemsToShow}
             changenumberofitemstoshow={this.changeNumberOfItemsToShow}
             newsfeedfilter={this.state.newsfeedfilter}
