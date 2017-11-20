@@ -136,7 +136,7 @@ const TopicItem = props => {
   const { item } = props;
   return (
     <div>
-      <a className="" href="#">
+      <a className="" href={`/topic/${item.name}/trending`}>
         <span className={'thumb ' + item.icon} />
         <strong>{item.name}</strong>
       </a>
@@ -226,7 +226,7 @@ const NewsItem = props => {
   const { item } = props;
   return (
     <article>
-      <a href="#" target="_blank">
+      <a href={`https://news.ycombinator.com/item?id=${item.id}`} target="_blank">
         <span>
           <em>▲</em>
           {item.votes}
@@ -258,7 +258,7 @@ const NewsItem = props => {
         <summary>
           <time>{item.date}</time>
           <span> by </span>
-          <a href="#">{item.author}</a>
+          <a href={`/author/${item.author}`}>{item.author}</a>
           <NewsTagList tags={item.tags} />
         </summary>
       </div>
@@ -278,7 +278,7 @@ const NewsTagList = props => {
 const NewsTagItem = props => {
   const { tag } = props;
   return (
-    <a className="tag" href="#">
+    <a className="tag" href={`/topic/${tag}/trending`}>
       {tag}
     </a>
   );
