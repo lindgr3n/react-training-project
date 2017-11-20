@@ -4,7 +4,7 @@ import { /* NEWSFEED_DATA, */ TOPICS_DATA } from './data';
 
 import './HackerHuntApp.css';
 
-const URL = 'https://hackerhunt.co/api/daily/0';
+const URL = 'https://hackerhunt.co/api/daily/';
 
 class HackerHuntApp extends Component {
   constructor(props) {
@@ -14,21 +14,18 @@ class HackerHuntApp extends Component {
       news: [],
       numberOfItemsToShow: 10,
       newsfeedfilter: 'POPULAR',
-      isLoading: false
+      isLoading: false,
+      page: 0
     };
 
     this.changeNumberOfItemsToShow = this.changeNumberOfItemsToShow.bind(this);
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
+    this.onChangeDayHandler = this.onChangeDayHandler.bind(this);
+    this.requestData = this.requestData.bind(this);
   }
 
-  async componentDidMount() {
-    this.setState({ isLoading: true });
-    const response = await fetch(URL);
-    const data = await response.json();
-    this.setState({
-      news: data.data,
-      isLoading: false
-    });
+  componentDidMount() {
+    this.requestData();
   }
 
   changeNumberOfItemsToShow() {
@@ -39,6 +36,20 @@ class HackerHuntApp extends Component {
     const target = event.target;
     const eventAction = target.selectedOptions[0].attributes['tag'].value;
     this.setState({ newsfeedfilter: eventAction });
+  }
+
+  onChangeDayHandler() {
+    this.setState({ page: this.state.page + 1 }, this.requestData);
+  }
+
+  async requestData() {
+    this.setState({ isLoading: true });
+    const response = await fetch(`${URL}${this.state.page}`);
+    const data = await response.json();
+    this.setState({
+      news: data.data,
+      isLoading: false
+    });
   }
 
   render() {
@@ -54,6 +65,7 @@ class HackerHuntApp extends Component {
             newsfeedfilter={this.state.newsfeedfilter}
             filterchangehandler={this.filterChangeHandler}
             isLoading={this.state.isLoading}
+            onChangeDayHandler={this.onChangeDayHandler}
           />
         </section>
       </div>
@@ -124,7 +136,7 @@ const TopicItem = props => {
 };
 
 const HHContent = props => {
-  const { news, count, changenumberofitemstoshow, newsfeedfilter, filterchangehandler, isLoading } = props;
+  const { news, count, changenumberofitemstoshow, newsfeedfilter, filterchangehandler, isLoading, onChangeDayHandler } = props;
 
   if (isLoading) {
     return (
@@ -143,7 +155,7 @@ const HHContent = props => {
       <NewsFeedList data={news} count={count} filter={newsfeedfilter} />
       <NewsFeedGetMore news={news} count={count} changenumberofitemstoshow={changenumberofitemstoshow} />
       <footer>
-        <a href="/page/1">Previous day</a>
+        <a onClick={onChangeDayHandler}>Previous day</a>
       </footer>
     </div>
   );
