@@ -201,9 +201,9 @@ NewsFeedFilter.propTypes = {
 
 const NewsFeedList = props => {
   const { data, count, filter } = props;
-  const votesSort = (a, b) => (parseInt(a.votes) > parseInt(b.votes) ? -1 : 1);
-  const newestSort = (a, b) => (parseInt(a.date) > parseInt(b.date) ? -1 : 1);
-  const commentsSort = (a, b) => (parseInt(a.comments) > parseInt(b.comments) ? -1 : 1);
+  const votesSort = (a, b) => (parseInt(a.votes, 10) > parseInt(b.votes, 10) ? -1 : 1);
+  const newestSort = (a, b) => (parseInt(a.date, 10) > parseInt(b.date, 10) ? -1 : 1);
+  const commentsSort = (a, b) => (parseInt(a.comments, 10) > parseInt(b.comments, 10) ? -1 : 1);
   let sortFunction = votesSort;
   switch (filter) {
     case 'votes':
