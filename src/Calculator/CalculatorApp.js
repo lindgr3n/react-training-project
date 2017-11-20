@@ -15,7 +15,7 @@ class CaclculatorApp extends Component {
   }
   valueClick(value) {
     // console.log(value);
-    let result = parseInt(this.state.result);
+    let result = parseInt(this.state.result, 10);
     let operator = this.isOperator(value);
 
     if (operator) {
@@ -42,17 +42,17 @@ class CaclculatorApp extends Component {
     switch (operator) {
       case '%':
         this.setState({
-          result: result / parseInt(value)
+          result: result / parseInt(value, 10)
         });
         break;
       case '-':
         this.setState({
-          result: result - parseInt(value)
+          result: result - parseInt(value, 10)
         });
         break;
       case '+':
         this.setState({
-          result: result + parseInt(value)
+          result: result + parseInt(value, 10)
         });
         break;
       default:
