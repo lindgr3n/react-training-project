@@ -55,7 +55,7 @@ const GithubContent = props => {
                                 <path fillRule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z" />
                               </svg>
                               <div className="select-menu-item-text">
-                                <input checked="checked" id="do_included" name="do" type="radio" value="included" />
+                                <input defaultChecked="checked" id="do_included" name="do" type="radio" value="included" />
                                 <span className="select-menu-item-heading">Not watching</span>
                                 <span className="description">Be notified when participating or @mentioned.</span>
                                 <span className="js-select-button-text hidden-select-button-text">
@@ -217,7 +217,7 @@ const GithubContent = props => {
               </h1>
             </div>
 
-            <nav className="reponav js-repo-nav js-sidenav-container-pjax container" itemScope="" itemType="http://schema.org/BreadcrumbList" role="navigation" data-pjax="#js-repo-pjax-container">
+            <nav className="reponav js-repo-nav js-sidenav-container-pjax container" itemScope="" itemType="http://schema.org/BreadcrumbList" data-pjax="#js-repo-pjax-container">
               <span itemScope="" itemType="http://schema.org/ListItem" itemProp="itemListElement">
                 <a
                   href="/okonet/lint-staged"
@@ -337,7 +337,9 @@ const GithubContent = props => {
                         <h4 className="mb-2">
                           <span className="mr-2">
                             <g-emoji alias="wave" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44b.png" ios-version="6.0">
-                              👋
+                              <span role="img" aria-label="wave">
+                                👋
+                              </span>
                             </g-emoji>
                           </span>Want to submit an issue to okonet/lint-staged?
                         </h4>
@@ -430,7 +432,7 @@ const GithubContent = props => {
                         name="q"
                         placeholder="Search all issues"
                         type="text"
-                        value="is:issue is:open "
+                        defaultValue="is:issue is:open "
                       />
                       <svg aria-hidden="true" className="octicon octicon-search subnav-search-icon" height="16" version="1.1" viewBox="0 0 16 16" width="16">
                         <path
@@ -818,32 +820,44 @@ const GithubContent = props => {
 
                                   <a href="/okonet/lint-staged/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc" className="reaction-sort-item js-navigation-item ">
                                     <g-emoji alias="+1" className="emoji" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" ios-version="6.0">
-                                      👍
+                                      <span role="img" aria-label="thumb up">
+                                        👍
+                                      </span>
                                     </g-emoji>
                                   </a>
                                   <a href="/okonet/lint-staged/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions--1-desc" className="reaction-sort-item js-navigation-item ">
                                     <g-emoji alias="-1" className="emoji" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44e.png" ios-version="6.0">
-                                      👎
+                                      <span role="img" aria-label="thumb down">
+                                        👎
+                                      </span>
                                     </g-emoji>
                                   </a>
                                   <a href="/okonet/lint-staged/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-smile-desc" className="reaction-sort-item js-navigation-item ">
                                     <g-emoji alias="smile" className="emoji" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png" ios-version="6.0">
-                                      😄
+                                      <span role="img" aria-label="happy">
+                                        😄
+                                      </span>
                                     </g-emoji>
                                   </a>
                                   <a href="/okonet/lint-staged/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-tada-desc" className="reaction-sort-item js-navigation-item ">
                                     <g-emoji alias="tada" className="emoji" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png" ios-version="6.0">
-                                      🎉
+                                      <span role="img" aria-label="fireworks">
+                                        🎉
+                                      </span>
                                     </g-emoji>
                                   </a>
                                   <a href="/okonet/lint-staged/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-thinking_face-desc" className="reaction-sort-item js-navigation-item ">
                                     <g-emoji alias="thinking_face" className="emoji" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f615.png" ios-version="6.0">
-                                      😕
+                                      <span role="img" aria-label="sad">
+                                        😕
+                                      </span>
                                     </g-emoji>
                                   </a>
                                   <a href="/okonet/lint-staged/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-heart-desc" className="reaction-sort-item js-navigation-item ">
                                     <g-emoji alias="heart" className="emoji" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2764.png" ios-version="6.0">
-                                      ❤️
+                                      <span role="img" aria-label="heart">
+                                        ❤️
+                                      </span>
                                     </g-emoji>
                                   </a>
                                 </div>
