@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class IncrementApp extends Component {
   constructor(props) {
@@ -40,9 +41,18 @@ const Counter = props => {
   return <input readOnly value={value} />;
 };
 
+Counter.propTypes = {
+  value: PropTypes.number.isRequired
+};
+
 const ValueButton = props => {
   const { text, changeHandler } = props;
   return <button onClick={changeHandler}>{text}</button>;
+};
+
+ValueButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  changeHandler: PropTypes.func.isRequired
 };
 
 export default IncrementApp;
