@@ -6,6 +6,7 @@ import WeatherChannelApp from './WeatherChannel/WeatherChannelApp';
 import CalculatorApp from './Calculator/CalculatorApp';
 import HackerHunt from './HackerHunt/HackerHuntApp';
 import GithubIssues from './GithubIssues/GithubIssuesApp';
+import IncrementApp from './Increment/IncrementApp';
 
 class App extends Component {
   render() {
@@ -39,6 +40,11 @@ class App extends Component {
                   Github issues clone
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" activeClassName="active" to="/Increment">
+                  Increment counter
+                </NavLink>
+              </li>
             </ul>
           </div>
 
@@ -47,6 +53,7 @@ class App extends Component {
           <Route exact path="/Calculator" component={CalculatorApp} />
           <Route exact path="/HackerHunt" component={HackerHunt} />
           <Route exact path="/GithubIssues" component={GithubIssues} />
+          <Route exact path="/Increment" component={IncrementApp} />
         </div>
       </Router>
     );
