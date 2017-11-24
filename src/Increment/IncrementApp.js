@@ -1,58 +1,36 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-class IncrementApp extends Component {
-  constructor(props) {
-    super(props);
+import Counter from './Counter';
 
-    this.state = {
-      counter: 0
-    };
-
-    this.onIncrement = this.onIncrement.bind(this);
-    this.onDecrement = this.onDecrement.bind(this);
-  }
-
-  onIncrement() {
-    this.setState({
-      counter: this.state.counter + 1
-    });
-  }
-
-  onDecrement() {
-    this.setState({
-      counter: this.state.counter - 1
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <ValueButton text="-" changeHandler={this.onDecrement} />
-        <Counter value={this.state.counter} />
-        <ValueButton text="+" changeHandler={this.onIncrement} />
-      </div>
-    );
-  }
-}
-
-const Counter = props => {
-  const { value } = props;
-  return <input readOnly value={value} />;
+const initialState = {
+  counter: 0
 };
 
-Counter.propTypes = {
-  value: PropTypes.number.isRequired
+const reducer = (state = initialState, action) => {
+  console.log(state, action);
+
+  switch (action.type) {
+    case 'INCREMENT':
+      return {
+        counter: state.counter + 1
+      };
+    case 'DECREMENT':
+      return {
+        counter: state.counter - 1
+      };
+    default:
+      return state;
+  }
 };
 
-const ValueButton = props => {
-  const { text, changeHandler } = props;
-  return <button onClick={changeHandler}>{text}</button>;
-};
+const store = createStore(reducer);
 
-ValueButton.propTypes = {
-  text: PropTypes.string.isRequired,
-  changeHandler: PropTypes.func.isRequired
-};
+const IncrementApp = () => (
+  <Provider store={store}>
+    <Counter />
+  </Provider>
+);
 
 export default IncrementApp;
