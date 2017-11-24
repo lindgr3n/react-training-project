@@ -6,7 +6,7 @@ import WeatherChannelApp from './WeatherChannel/WeatherChannelApp';
 import CalculatorApp from './Calculator/CalculatorApp';
 import HackerHunt from './HackerHunt/HackerHuntApp';
 import GithubIssues from './GithubIssues/GithubIssuesApp';
-import IncrementApp from './Increment/IncrementApp';
+import Counter from './Increment/IncrementApp';
 
 class App extends Component {
   render() {
@@ -53,7 +53,7 @@ class App extends Component {
           <Route exact path="/Calculator" component={CalculatorApp} />
           <Route exact path="/HackerHunt" component={HackerHunt} />
           <Route exact path="/GithubIssues" component={GithubIssues} />
-          <Route exact path="/Increment" component={IncrementApp} />
+          <Route exact path="/Increment" component={Counter} />
         </div>
       </Router>
     );
