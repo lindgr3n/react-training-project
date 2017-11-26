@@ -37,7 +37,6 @@ class Counter extends Component {
 }
 
 Counter.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   counter: PropTypes.number.isRequired,
   decrement: PropTypes.func.isRequired,
   increment: PropTypes.func.isRequired
