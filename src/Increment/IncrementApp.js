@@ -1,14 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 
 import Counter from './Counter';
 
-const initialState = {
+const defaultState = {
   counter: 0
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state, action) => {
   console.log(state, action);
 
   switch (action.type) {
@@ -25,7 +25,8 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const store = createStore(reducer);
+const enhancers = compose(window.devToolsExtension ? window.devToolsExtension() : f => f);
+const store = createStore(reducer, defaultState, enhancers);
 
 const IncrementApp = () => (
   <Provider store={store}>
