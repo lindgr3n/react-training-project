@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as actionCreators from './action_creators';
 
 class Counter extends Component {
   constructor(props) {
@@ -14,22 +15,22 @@ class Counter extends Component {
     /* this.setState({
       counter: this.state.counter + 1
     }); */
-    this.props.dispatch({ type: 'INCREMENT' });
+    // this.props.dispatch({ type: 'INCREMENT' });
   }
 
   onDecrement() {
     /* this.setState({
       counter: this.state.counter - 1
     }); */
-    this.props.dispatch({ type: 'DECREMENT' });
+    // this.props.dispatch({ type: 'DECREMENT' });
   }
 
   render() {
     return (
       <div>
-        <ValueButton text="-" changeHandler={this.onDecrement} />
+        <ValueButton text="-" changeHandler={this.props.decrement /* this.onDecrement */} />
         <CounterValue value={this.props.counter} />
-        <ValueButton text="+" changeHandler={this.onIncrement} />
+        <ValueButton text="+" changeHandler={this.props.increment /* this.onIncrement */} />
       </div>
     );
   }
@@ -37,7 +38,9 @@ class Counter extends Component {
 
 Counter.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  counter: PropTypes.number.isRequired
+  counter: PropTypes.number.isRequired,
+  decrement: PropTypes.func.isRequired,
+  increment: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -47,7 +50,8 @@ const mapStateToProps = state => {
 };
 
 // export default IncrementApp;
-export default connect(mapStateToProps)(Counter);
+// Connect actionCreators so we can dispatch an action directly inside our changeHandler
+export default connect(mapStateToProps, actionCreators)(Counter);
 
 const CounterValue = props => {
   const { value } = props;
