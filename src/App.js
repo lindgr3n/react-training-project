@@ -7,6 +7,7 @@ import CalculatorApp from './Calculator/CalculatorApp';
 import HackerHunt from './HackerHunt/HackerHuntApp';
 import GithubIssues from './GithubIssues/GithubIssuesApp';
 import Counter from './Increment/IncrementApp';
+import ToDoApp from './ToDo/ToDoApp';
 
 class App extends Component {
   render() {
@@ -45,6 +46,11 @@ class App extends Component {
                   Increment counter
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" activeClassName="active" to="/ToDo">
+                  ToDo App
+                </NavLink>
+              </li>
             </ul>
           </div>
 
@@ -54,6 +60,7 @@ class App extends Component {
           <Route exact path="/HackerHunt" component={HackerHunt} />
           <Route exact path="/GithubIssues" component={GithubIssues} />
           <Route exact path="/Increment" component={Counter} />
+          <Route exact path="/ToDo" component={ToDoApp} />
         </div>
       </Router>
     );
