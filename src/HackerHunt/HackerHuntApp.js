@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { /* NEWSFEED_DATA, */ TOPICS_DATA } from './data';
 
-import './HackerHuntApp.css';
+// import './HackerHuntApp.css';
 
 const URL = 'https://hackerhunt.co/api/daily/';
 
