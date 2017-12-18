@@ -30,17 +30,23 @@ function victoryMatch(input) {
   );
 }
 
+const INITIAL_STATE = { playerOne: true, board: BOARD, winner: '' };
+
 class TicTacToApp extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { playerOne: true, board: BOARD };
+    this.state = INITIAL_STATE;
 
     this.onSelectSquare = this.onSelectSquare.bind(this);
+    this.restart = this.restart.bind(this);
   }
 
   onSelectSquare(index) {
     if (this.state.board[index].marker !== '') {
+      return;
+    }
+    if (this.state.winner !== '') {
       return;
     }
     const newBoard = [...this.state.board];
@@ -52,7 +58,12 @@ class TicTacToApp extends Component {
     const isWinner = checkWinner(PLAYERS_MARKER[playerIndex], newBoard);
     if (isWinner) {
       console.log('Winner is: ' + PLAYERS_MARKER[playerIndex]);
+      this.setState({ winner: PLAYERS_MARKER[playerIndex] });
     }
+  }
+
+  restart() {
+    this.setState(INITIAL_STATE);
   }
 
   render() {
@@ -61,7 +72,13 @@ class TicTacToApp extends Component {
         <div />
         <div>
           <h1>Tic-Tac-To</h1>
-          <Board onSelectSquare={this.onSelectSquare} board={this.state.board} />
+          <div style={{ display: 'flex' }}>
+            <Board onSelectSquare={this.onSelectSquare} board={this.state.board} />
+            <div style={{ paddingLeft: '10px' }}>
+              <button onClick={this.restart}>Restart</button>
+            </div>
+          </div>
+          <Winner winner={this.state.winner} />
         </div>
         <div />
       </div>
@@ -70,6 +87,11 @@ class TicTacToApp extends Component {
 }
 
 export default TicTacToApp;
+
+const Winner = props => {
+  const { winner } = props;
+  return winner ? <h2>Winner is: {winner}!</h2> : null;
+};
 
 const Board = props => {
   const { board, onSelectSquare } = props;
