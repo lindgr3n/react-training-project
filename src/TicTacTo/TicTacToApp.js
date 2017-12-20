@@ -30,7 +30,13 @@ function victoryMatch(input) {
   );
 }
 
-const INITIAL_STATE = { playerOne: true, board: BOARD, winner: '' };
+const INITIAL_STATE = {
+  turn: 0,
+  playerOne: true,
+  board: BOARD,
+  winner: '',
+  moves: [{ playerOne: true, board: [BOARD] }]
+};
 
 class TicTacToApp extends Component {
   constructor(props) {
@@ -40,6 +46,7 @@ class TicTacToApp extends Component {
 
     this.onSelectSquare = this.onSelectSquare.bind(this);
     this.restart = this.restart.bind(this);
+    this.onChangeMove = this.onChangeMove.bind(this);
   }
 
   onSelectSquare(index) {
@@ -53,13 +60,34 @@ class TicTacToApp extends Component {
     const playerIndex = this.state.playerOne ? 0 : 1;
     newBoard[index] = Object.assign({}, newBoard[index], { marker: PLAYERS_MARKER[playerIndex] });
 
-    this.setState({ board: newBoard, playerOne: !this.state.playerOne });
+    // Check number of turns
+    let newMoves = [...this.state.moves];
+    if (newMoves.length - 1 > this.state.turn) {
+      newMoves = this.state.moves.slice(0, this.state.turn + 1);
+    }
+    this.setState({
+      turn: this.state.turn + 1,
+      board: newBoard,
+      playerOne: !this.state.playerOne,
+      moves: [
+        ...newMoves,
+        {
+          playerOne: !this.state.playerOne,
+          board: newBoard
+        }
+      ]
+    });
 
     const isWinner = checkWinner(PLAYERS_MARKER[playerIndex], newBoard);
     if (isWinner) {
       console.log('Winner is: ' + PLAYERS_MARKER[playerIndex]);
       this.setState({ winner: PLAYERS_MARKER[playerIndex] });
     }
+  }
+
+  onChangeMove(index) {
+    console.log(index);
+    this.setState({ turn: index, board: this.state.moves[index].board, playerOne: this.state.moves[index].playerOne });
   }
 
   restart() {
@@ -76,6 +104,9 @@ class TicTacToApp extends Component {
             <Board onSelectSquare={this.onSelectSquare} board={this.state.board} />
             <div style={{ paddingLeft: '10px' }}>
               <button onClick={this.restart}>Restart</button>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                Moves: <Moves moves={this.state.moves} onChangeMove={this.onChangeMove} />
+              </div>
             </div>
           </div>
           <Winner winner={this.state.winner} />
@@ -87,6 +118,22 @@ class TicTacToApp extends Component {
 }
 
 export default TicTacToApp;
+
+const Moves = props => {
+  const { moves, onChangeMove } = props;
+  return moves.map((move, i) => <Move key={i} index={i} move={move.board} onChangeMove={onChangeMove} />);
+};
+
+const Move = props => {
+  const { index, move, onChangeMove } = props;
+  const buttonText = index === 0 ? 'Go to game start!' : `Go to move #${index}`;
+  return (
+    <div>
+      {index}.
+      <button onClick={() => onChangeMove(index)}>{buttonText}</button>
+    </div>
+  );
+};
 
 const Winner = props => {
   const { winner } = props;
