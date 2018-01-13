@@ -10,6 +10,7 @@ import GithubIssues from './GithubIssues/GithubIssuesApp';
 import Counter from './Increment/IncrementApp';
 import ToDoApp from './ToDo/ToDoApp';
 import TicTacToApp from './TicTacTo/TicTacToApp';
+import AskAndAnswerApp from './AskAndAnswer/AskAndAnswerApp';
 
 const APPS = [
   { component: WeatherChannelApp, link: 'Weather', description: 'Weather Channel' },
@@ -18,7 +19,8 @@ const APPS = [
   { component: GithubIssues, link: 'GithubIssues', description: 'Github issues clone' },
   { component: Counter, link: 'Increment', description: 'Increment counter' },
   { component: ToDoApp, link: 'ToDo', description: 'ToDo App' },
-  { component: TicTacToApp, link: 'TicTacTo', description: 'TicTacTo' }
+  { component: TicTacToApp, link: 'TicTacTo', description: 'TicTacTo' },
+  { component: AskAndAnswerApp, link: 'AskAndAnswer', description: 'Ask and answer' }
 ];
 
 class App extends Component {
